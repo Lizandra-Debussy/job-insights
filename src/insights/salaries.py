@@ -3,21 +3,14 @@ from src.insights.jobs import read
 
 
 def get_max_salary(path: str) -> int:
-    """Get the maximum salary of all jobs
+    jobs = read(path)
+    max_salary = []
 
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The maximum salary paid out of all job opportunities
-    """
-    raise NotImplementedError
+    for row in jobs:
+        salary = row["max_salary"]
+        if salary.isnumeric():
+            max_salary.append(int(salary))
+    return max(max_salary)
 
 
 def get_min_salary(path: str) -> int:
@@ -29,9 +22,6 @@ def get_min_salary(path: str) -> int:
         if salary.isnumeric():
             min_salary.append(int(salary))
     return min(min_salary)
-
-
-"""print(get_min_salary("data/jobs.csv"))"""
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
